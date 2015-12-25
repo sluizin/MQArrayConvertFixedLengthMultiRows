@@ -20,16 +20,16 @@ public final class ElementParameter {
 	 */
 	int offset = 10;
 	/**
-	 * 是否允许溢出 是否 >(rowLength + offset)
+	 * 是否允许溢出 是否 >(rowLength + offset)  (在转换前过滤掉超出的单元)
 	 */
-	boolean isAllowOverflow = false;
+	final boolean isAllowOverflow = false;
 	/**
-	 * 是否允许低量 是否 <(rowLength - offset)
+	 * 是否允许低量 是否 <(rowLength - offset)  (暂未开发)
 	 */
-	boolean isAllowLowvolume = true;
+	final boolean isAllowLowvolume = true;
 
 	/**
-	 * 最小长度
+	 * 最小长度 rowLength - offset
 	 * @return int
 	 */
 	public final int lengthMin() {
@@ -37,11 +37,24 @@ public final class ElementParameter {
 	}
 
 	/**
-	 * 最大长度
+	 * 最大长度 rowLength + offset
 	 * @return int
 	 */
 	public final int lengthMax() {
 		return rowLength + offset;
+	}
+
+	/**
+	 * 判断长度是允许 (暂未开发)<br/>
+	 * 注意：不进行 (len >= lengthMin() && len <= lengthMax()) 区间判断 <br/>
+	 * @param len int
+	 * @return boolean
+	 */
+	@Deprecated
+	public final boolean isAllow(final int len) {
+		if (isAllowOverflow) return true;
+		if (isAllowLowvolume && len < lengthMin()) return true;
+		return false;
 	}
 
 	public final int getRowLength() {
@@ -72,16 +85,8 @@ public final class ElementParameter {
 		return isAllowOverflow;
 	}
 
-	public final void setAllowOverflow(final boolean isAllowOverflow) {
-		this.isAllowOverflow = isAllowOverflow;
-	}
-
 	public final boolean isAllowLowvolume() {
 		return isAllowLowvolume;
-	}
-
-	public final void setAllowLowvolume(final boolean isAllowLowvolume) {
-		this.isAllowLowvolume = isAllowLowvolume;
 	}
 
 }
