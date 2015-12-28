@@ -106,19 +106,15 @@ public final class UtilTool {
 	public static final IElement[] elementCompositor(final IElement[] elements, final boolean reverse) {
 		final int len = elements.length;
 		final IElement[] newElements = checkoutElementNull(elements);
-		//System.arraycopy(elements, 0, newElements, 0, len);
 		IElement p = null;
 		boolean change = false;
 		for (int i = 0, ii; i < (len - 1); i++)
-			for (ii = i + 1; ii < len; ii++) {
-				change = false;
+			for (ii = i + 1; ii < len; change = false, ii++) {
 				if (newElements[i].elementLevel() < newElements[ii].elementLevel()) {
 					change = true;
 				} else {
 					if (newElements[i].elementLevel() == newElements[ii].elementLevel()
-							&& ((reverse && newElements[i].elementLength() < newElements[ii].elementLength()) || ((!reverse) && newElements[i].elementLength() > newElements[ii].elementLength()))) {
-						change = true;
-					}
+							&& ((reverse && newElements[i].elementLength() < newElements[ii].elementLength()) || ((!reverse) && newElements[i].elementLength() > newElements[ii].elementLength()))) change = true;
 				}
 				/* 进行交换 */
 				if (change) {
@@ -127,13 +123,6 @@ public final class UtilTool {
 					newElements[ii] = p;
 				}
 			}
-		//if ((reverse && newElements[i].elementLength() < newElements[ii].elementLength())
-		//|| ((!reverse) && newElements[i].elementLength() > newElements[ii].elementLength())) {
-		/* 进行交换 */
-		//p = newElements[i];
-		//newElements[i] = newElements[ii];
-		//newElements[ii] = p;
-		//}
 		return newElements;
 	}
 
