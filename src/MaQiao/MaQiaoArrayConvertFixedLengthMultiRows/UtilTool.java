@@ -12,7 +12,7 @@ public final class UtilTool {
 	 */
 	public static final String repleat(final String str, final int num) {
 		final int len = str.length();
-		if (len <= 0 || num <= 0) return new String();
+		if (len <= 0 || num <= 0) return new String("");
 		String newString = new String(new char[len * num]);
 		Object objSource = Consts.UNSAFE.getObject(str, Consts.StringArrayOffset);
 		Object objDest = Consts.UNSAFE.getObject(newString, Consts.StringArrayOffset);

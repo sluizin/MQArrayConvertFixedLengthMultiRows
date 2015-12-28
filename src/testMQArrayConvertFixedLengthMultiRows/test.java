@@ -11,24 +11,34 @@ public class test {
 
 	@Test
 	public void test1() {
+		//获取数据
 		newclass[] newarray = getnewclass();
+		//初步显示
 		to(newarray);
+		//单元组排序
 		IElement[] newarrays = UtilTool.elementCompositor(newarray, true);
-		//输出
+		//排序后的输出
 		to(newarrays);
+		//开始进行计算
 		MQArrayConvertFixedLengthMultiRows MQACFLMR = new MQArrayConvertFixedLengthMultiRows();
+		//设置参数
 		ElementParameter paramenter = new ElementParameter();
 		{
 			paramenter.setRowLength(190);
 			paramenter.setIntervalLength(2);
 			paramenter.setOffset(3);
 		}
+		//参数导入
 		MQACFLMR.setParamenter(paramenter);
+		//得到结果
 		IElement[][] convertArray = MQACFLMR.convertArray(newarrays);
-		//输出
-		System.out.println("[" + paramenter.lengthMin() + "----" + paramenter.lengthMax() + "]");
-		System.out.println("----------");
+		//显示长度范围
+		{
+			System.out.println("[" + paramenter.lengthMin() + "----" + paramenter.lengthMax() + "]");
+			System.out.println("----------");
+		}
 		//to(convertArray);
+		//输出结果
 		to(convertArray, paramenter);
 		/*		{
 					String k1;
@@ -86,6 +96,10 @@ public class test {
 		System.out.println("==============================================");
 	}
 
+	/**
+	 * 获取源数据
+	 * @return newclass[]
+	 */
 	public final newclass[] getnewclass() {
 		/*		
 		 * String[] chaArray = { "壹读", "中华人民共和国教育部", "重庆晚报", "红网", "南海网", "内蒙古农业大学职业技术学院", "药草园", "中青在线", "中国教育在线", "健雄职业技术学院", "新华网", "焦作大学", "白求恩医科大学北京校友会", "北京晨报", "114团购网", "百度搜索", "万通公益基金会",
@@ -102,6 +116,7 @@ public class test {
 		final int maxlength = chaArray.length;
 		//为简便计，把所有名称对应的等级，放在一个数值新组中。
 		final int[] arrayLevel = new int[maxlength];
+		arrayLevel[0] = 120;
 		arrayLevel[1] = 100;
 		arrayLevel[4] = 95;
 		arrayLevel[7] = 27;

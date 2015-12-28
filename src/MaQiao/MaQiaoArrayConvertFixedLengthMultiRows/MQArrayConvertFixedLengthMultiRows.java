@@ -29,7 +29,11 @@ public final class MQArrayConvertFixedLengthMultiRows {
 		}
 		return resultArray;
 	}
-
+	/**
+	 * 单元插入
+	 * @param elementList List< ArrayList < IElement > >
+	 * @param e IElement
+	 */
 	private final void elementInert(final List<ArrayList<IElement>> elementList, final IElement e) {
 		final int lenA = elementList.size();
 		final int para_lengthMax = this.paramenter.lengthMax();
