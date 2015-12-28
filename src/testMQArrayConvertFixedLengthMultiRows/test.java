@@ -19,7 +19,7 @@ public class test {
 		MQArrayConvertFixedLengthMultiRows MQACFLMR = new MQArrayConvertFixedLengthMultiRows();
 		ElementParameter paramenter = new ElementParameter();
 		{
-			paramenter.setRowLength(38);
+			paramenter.setRowLength(190);
 			paramenter.setIntervalLength(2);
 			paramenter.setOffset(3);
 		}
@@ -28,7 +28,7 @@ public class test {
 		//输出
 		System.out.println("[" + paramenter.lengthMin() + "----" + paramenter.lengthMax() + "]");
 		System.out.println("----------");
-		to(convertArray);
+		//to(convertArray);
 		to(convertArray, paramenter);
 		/*		{
 					String k1;
@@ -87,12 +87,32 @@ public class test {
 	}
 
 	public final newclass[] getnewclass() {
-		String[] chaArray = { "壹读", "中华人民共和国教育部", "重庆晚报", "红网", "南海网", "内蒙古农业大学职业技术学院", "药草园", "中青在线", "中国教育在线", "健雄职业技术学院", "新华网", "焦作大学", "白求恩医科大学北京校友会", "北京晨报", "114团购网", "百度搜索", "万通公益基金会",
-				"中国红十字基金会", "九江职业大学", "中国扶贫基金会", "中华慈善网", "大河网", "修正药业", "中国机械网", "中国家具网", "中国水泥网", "卓越网", "腾讯", "中国网库", "电影网", "壹基金", "腾讯公益网", "中国绿化基金会" };
+		/*		
+		 * String[] chaArray = { "壹读", "中华人民共和国教育部", "重庆晚报", "红网", "南海网", "内蒙古农业大学职业技术学院", "药草园", "中青在线", "中国教育在线", "健雄职业技术学院", "新华网", "焦作大学", "白求恩医科大学北京校友会", "北京晨报", "114团购网", "百度搜索", "万通公益基金会",
+						"中国红十字基金会", "九江职业大学", "中国扶贫基金会", "中华慈善网", "大河网", "修正药业", "中国机械网", "中国家具网", "中国水泥网", "卓越网", "腾讯", "中国网库", "电影网", "壹基金", "腾讯公益网", "中国绿化基金会" };
+				
+				*/
+		/**
+		 * 99114官网友情链接
+		 */
+		final String[] chaArray = { "B2B", "单品网", "OFweek电子工程网", "酒代理", "网上轻纺城", "五金", "商路通", "日本亚马逊", "环球鞋网", "食品商务网", "爱喇叭网", "中国金属新闻网", "玻璃网", "维库仪器仪表网", "007商务站", "中关村商城", "项目加盟网", "食品代理", "商机网",
+				"服装批发", "环球贸易网", "阿土伯交易网", "市场研究报告", "铁甲论坛", "中国企业黄页网", "中国供应商", "五金商机网", "创业贷款", "首商网", "大蒜价格", "报纸广告", "万贯五金机电网", "前瞻数据", "中亚商务网", "中国会展门户", "就是要仪器", "外汇投资", "跨国采购网", "中华企业录",
+				"中国黄页网", "铝", "华侨路茶坊", "万国企业网", "全球采购网", "企业保险", "铝锭价格", "零度网", "工程机械", "女装批发", "志趣网", "网络电台", "中国ic网", "慧聪网", "云同盟", "商机网", "优质企商网", "搜房深圳二手房", "B2B电子商务", "中国企业链", "跨国采购网", "品牌特卖",
+				"第一企业网", "园林", "物流", "火车票", "免费法律咨询", "装修网", "二手设备", "化妆品招商网" };
 		final int maxlength = chaArray.length;
-		newclass[] array = new newclass[maxlength];
+		//为简便计，把所有名称对应的等级，放在一个数值新组中。
+		final int[] arrayLevel = new int[maxlength];
+		arrayLevel[1] = 100;
+		arrayLevel[4] = 95;
+		arrayLevel[7] = 27;
+		arrayLevel[9] = 90;
+		arrayLevel[14] = 10;
+		arrayLevel[19] = 58;
+		arrayLevel[28] = 66;
+		arrayLevel[40] = 21;
+		final newclass[] array = new newclass[maxlength];
 		for (int i = 0; i < maxlength; i++)
-			array[i] = new newclass(chaArray[i]);
+			array[i] = new newclass(chaArray[i], arrayLevel[i]);
 		/*		for (int i = 0; i < maxlength; i++) {
 				newarray[i] = new newclass("a中c" + Rnd.getRndInt(1, maxlength));
 				System.out.println("ByteUtil:" + UtilTool.getBytesLength(newarray[i].name));
@@ -104,10 +124,12 @@ public class test {
 	private class newclass implements IElement {
 		private String name = "";
 		private int value = 0;
+		private int Level = 0;
 
-		public newclass(String name) {
+		public newclass(String name, int Level) {
 			this.name = name;
 			this.value = UtilTool.getBytesLength(name);
+			this.Level = Level;
 		}
 
 		public int elementLength() {
@@ -116,12 +138,17 @@ public class test {
 
 		@Override
 		public String toString() {
-			return "[name=" + name + "\t, value=" + this.value + "]";
+			return "newclass [value=" + value + "\t, Level=" + Level + "\t,name=" + name + " ]";
 		}
 
 		@Override
 		public String elementString() {
 			return this.name;
+		}
+
+		@Override
+		public int elementLevel() {
+			return this.Level;
 		}
 
 	}

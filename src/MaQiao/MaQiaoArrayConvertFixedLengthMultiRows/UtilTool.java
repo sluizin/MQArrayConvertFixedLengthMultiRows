@@ -20,6 +20,7 @@ public final class UtilTool {
 			System.arraycopy(objSource, 0, objDest, len * i, len);
 		return newString;
 	}
+
 	/**
 	 * 计算String长度<br/>
 	 * 其中汉字等非ascii字母占2位，ascii占1位，得到此字符串的长度(判断占1个字节还是2个字节)<br/>
@@ -107,14 +108,32 @@ public final class UtilTool {
 		final IElement[] newElements = checkoutElementNull(elements);
 		//System.arraycopy(elements, 0, newElements, 0, len);
 		IElement p = null;
+		boolean change = false;
 		for (int i = 0, ii; i < (len - 1); i++)
-			for (ii = i + 1; ii < len; ii++)
-				if ((reverse && newElements[i].elementLength() < newElements[ii].elementLength()) || ((!reverse) && newElements[i].elementLength() > newElements[ii].elementLength())) {
-					/* 进行交换 */
+			for (ii = i + 1; ii < len; ii++) {
+				change = false;
+				if (newElements[i].elementLevel() < newElements[ii].elementLevel()) {
+					change = true;
+				} else {
+					if (newElements[i].elementLevel() == newElements[ii].elementLevel()
+							&& ((reverse && newElements[i].elementLength() < newElements[ii].elementLength()) || ((!reverse) && newElements[i].elementLength() > newElements[ii].elementLength()))) {
+						change = true;
+					}
+				}
+				/* 进行交换 */
+				if (change) {
 					p = newElements[i];
 					newElements[i] = newElements[ii];
 					newElements[ii] = p;
 				}
+			}
+		//if ((reverse && newElements[i].elementLength() < newElements[ii].elementLength())
+		//|| ((!reverse) && newElements[i].elementLength() > newElements[ii].elementLength())) {
+		/* 进行交换 */
+		//p = newElements[i];
+		//newElements[i] = newElements[ii];
+		//newElements[ii] = p;
+		//}
 		return newElements;
 	}
 

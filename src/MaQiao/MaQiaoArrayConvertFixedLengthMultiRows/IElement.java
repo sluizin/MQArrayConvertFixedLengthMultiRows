@@ -12,6 +12,13 @@ public interface IElement {
 	 * @return int
 	 */
 	public int elementLength();
+
+	/**
+	 * 单元等级(数值越大，等级越高，排序越前)
+	 * @return int
+	 */
+	public int elementLevel();
+
 	/**
 	 * 单元标识
 	 * @return String
