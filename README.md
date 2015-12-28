@@ -1,5 +1,3 @@
-Constants 通用常量<br/>
-MaQiaoStringBuilder jvm外内存存储char，只支持(++=)，不提供(+-=)<br/>
 /**
  * 把单元组转换成多行单元组<br/>
  * @author Sunjian
