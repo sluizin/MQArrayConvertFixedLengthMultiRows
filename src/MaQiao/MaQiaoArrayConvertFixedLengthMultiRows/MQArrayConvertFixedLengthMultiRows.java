@@ -100,7 +100,10 @@ public final class MQArrayConvertFixedLengthMultiRows {
 	public final ElementParameter getParamenter() {
 		return paramenter;
 	}
-
+	/**
+	 * 设置参数
+	 * @param paramenter ElementParameter
+	 */
 	public final void setParamenter(final ElementParameter paramenter) {
 		this.paramenter = paramenter;
 	}

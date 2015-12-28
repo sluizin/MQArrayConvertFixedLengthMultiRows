@@ -12,4 +12,9 @@ public interface IElement {
 	 * @return int
 	 */
 	public int elementLength();
+	/**
+	 * 单元标识
+	 * @return String
+	 */
+	public String elementString();
 }

@@ -20,11 +20,11 @@ public final class ElementParameter {
 	 */
 	int offset = 10;
 	/**
-	 * 是否允许溢出 是否 >(rowLength + offset)  (在转换前过滤掉超出的单元)
+	 * 是否允许溢出 是否 >(rowLength + offset) (在转换前过滤掉超出的单元)
 	 */
 	final boolean isAllowOverflow = false;
 	/**
-	 * 是否允许低量 是否 <(rowLength - offset)  (暂未开发)
+	 * 是否允许低量 是否 <(rowLength - offset) (暂未开发)
 	 */
 	final boolean isAllowLowvolume = true;
 
@@ -61,6 +61,10 @@ public final class ElementParameter {
 		return rowLength;
 	}
 
+	/**
+	 * 每行长度 标准长度
+	 * @param rowLength int
+	 */
 	public final void setRowLength(final int rowLength) {
 		this.rowLength = rowLength;
 	}
@@ -69,6 +73,10 @@ public final class ElementParameter {
 		return intervalLength;
 	}
 
+	/**
+	 * 单元间隔 每个单元之间的长度
+	 * @param intervalLength int
+	 */
 	public final void setIntervalLength(final int intervalLength) {
 		this.intervalLength = intervalLength;
 	}
@@ -77,6 +85,10 @@ public final class ElementParameter {
 		return offset;
 	}
 
+	/**
+	 * 偏移量 (rowLength - offset) -- (rowLength + offset)
+	 * @param offset int
+	 */
 	public final void setOffset(final int offset) {
 		this.offset = offset;
 	}
