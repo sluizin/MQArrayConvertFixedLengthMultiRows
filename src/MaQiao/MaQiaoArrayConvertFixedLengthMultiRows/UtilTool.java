@@ -5,7 +5,12 @@ import java.util.List;
 
 public final class UtilTool {
 	/**
-	 * 重复字符串
+	 * 重复字符串<br/>
+	 * 
+	 * <pre>
+	 * repleat("abcXYZ",3)
+	 * abcXYZabcXYZabcXYZ
+	 * </pre>
 	 * @param str String
 	 * @param num int
 	 * @return String
@@ -14,8 +19,8 @@ public final class UtilTool {
 		final int len = str.length();
 		if (len <= 0 || num <= 0) return new String("");
 		String newString = new String(new char[len * num]);
-		Object objSource = Consts.UNSAFE.getObject(str, Consts.StringArrayOffset);
-		Object objDest = Consts.UNSAFE.getObject(newString, Consts.StringArrayOffset);
+		final Object objSource = Consts.UNSAFE.getObject(str, Consts.StringArrayOffset);
+		final Object objDest = Consts.UNSAFE.getObject(newString, Consts.StringArrayOffset);
 		for (int i = 0; i < num; i++)
 			System.arraycopy(objSource, 0, objDest, len * i, len);
 		return newString;
@@ -32,15 +37,15 @@ public final class UtilTool {
 		long len = str.length();
 		Object obj = Consts.UNSAFE.getObject(str, Consts.StringArrayOffset);
 		int sort = 0;
-		//System.out.println("len:" + len);
+		char c;
 		for (long i = 0; i < len; i++) {
-			char c = Consts.UNSAFE.getChar(obj, Consts.ArrayAddress + ((i) << 1));
+			c = Consts.UNSAFE.getChar(obj, Consts.ArrayAddress + ((i) << 1));
 			if ((c >> 8) == 0) {
 				sort++;
-				//System.out.println("ascii:"+c);
+				/*System.out.println("ascii:"+c);*/
 				continue;
 			}
-			//System.out.println("中文:"+c);
+			/*System.out.println("中文:"+c);*/
 			sort += 2;
 		}
 		return sort;
@@ -67,12 +72,10 @@ public final class UtilTool {
 	public static final IElement[][] ListConvertArrays(final List<ArrayList<IElement>> listElement) {
 		final int len = listElement.size();
 		final IElement[][] newElementsArray = new IElement[len][];
-		int ii;
-		for (int i = 0; i < len; i++) {
+		for (int i = 0,ii; i < len; i++) {
 			IElement[] p = new IElement[listElement.get(i).size()];
-			for (ii = 0; ii < p.length; ii++) {
+			for (ii = 0; ii < p.length; ii++)
 				p[ii] = listElement.get(i).get(ii);
-			}
 			newElementsArray[i] = p;
 		}
 		//newElementsArray[i] = (IElement[]) listElement.get(i).toArray();
